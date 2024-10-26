@@ -18,6 +18,7 @@ export default function PetListByCategory() {
     const q = query(collection(db, "Pet"), where("category", "==", category));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
       setPetList((petList: any) => [...petList, doc.data()]);
     });
     setLoader(false);

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from "react-native";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/config/FirebaseConfig";
-import Colors from "@/constants/Colors";
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/config/FirebaseConfig';
+import Colors from '@/constants/Colors';
 
 export default function Category({ category }: { category: (value: any) => void }) {
   const [categoryList, setCategoryList] = useState<any>([]);
-  const [selectedCategory, setSelectedCategory] = useState<any>("Birds");
+  const [selectedCategory, setSelectedCategory] = useState<any>('Birds');
 
   useEffect(() => {
     getCategory();
@@ -14,7 +14,7 @@ export default function Category({ category }: { category: (value: any) => void 
 
   const getCategory = async () => {
     setCategoryList([]);
-    const snapshot = await getDocs(collection(db, "Category"));
+    const snapshot = await getDocs(collection(db, 'Category'));
     snapshot.forEach((doc) => {
       setCategoryList((categoryList: any) => [...categoryList, doc.data()]);
     });
@@ -22,7 +22,7 @@ export default function Category({ category }: { category: (value: any) => void 
 
   return (
     <View style={{ marginTop: 15 }}>
-      <Text style={{ fontFamily: "outfitMedium", fontSize: 20 }}>Category</Text>
+      <Text style={{ fontFamily: 'outfitMedium', fontSize: 20 }}>Category</Text>
       <FlatList
         numColumns={4}
         data={categoryList}
@@ -34,10 +34,18 @@ export default function Category({ category }: { category: (value: any) => void 
             }}
             style={{ flex: 1 }}
           >
-            <View style={[styles.container, selectedCategory === item.name && styles.selectedCategoryContainer]}>
-              <Image source={{ uri: item?.imageUrl }} style={{ width: 60, height: 60 }} />
+            <View
+              style={[
+                styles.container,
+                selectedCategory === item.name && styles.selectedCategoryContainer,
+              ]}
+            >
+              <Image
+                source={{ uri: item?.imageUrl }}
+                style={{ width: 60, height: 60, borderRadius: 10 }}
+              />
             </View>
-            <Text style={{ fontFamily: "outfit", textAlign: "center" }}>{item?.name}</Text>
+            <Text style={{ fontFamily: 'outfit', textAlign: 'center' }}>{item?.name}</Text>
           </TouchableOpacity>
         )}
       />
@@ -49,9 +57,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.SECONDARY,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    paddingVertical: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 15,
     borderColor: Colors.SECONDARY,
     borderWidth: 1,
