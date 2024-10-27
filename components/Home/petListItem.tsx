@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Colors from '@/constants/Colors';
 import { useRouter } from 'expo-router';
+import MarkFav from '../MarkFav';
 
 export default function PetListItem({ pet }: any) {
   const router = useRouter();
@@ -21,20 +22,31 @@ export default function PetListItem({ pet }: any) {
         }}
       />
       <Text style={{ fontFamily: 'outfitMedium', fontSize: 18 }}>{pet?.name}</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={{ flexDirection: 'column', justifyContent: 'space-between' }}>
         <Text style={{ color: Colors.GRAY, fontFamily: 'outfit' }}>{pet?.breed}</Text>
-        <Text
+        <View
           style={{
-            color: Colors.PRIMARY,
-            fontFamily: 'outfit',
-            backgroundColor: Colors.SECONDARY,
-            paddingHorizontal: 10,
-            fontSize: 12,
-            borderRadius: 10,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 10,
           }}
         >
-          {pet?.age} Yrs
-        </Text>
+          <Text
+            style={{
+              color: Colors.PRIMARY,
+              fontFamily: 'outfit',
+              backgroundColor: Colors.SECONDARY,
+              paddingHorizontal: 20,
+              paddingVertical: 2,
+              fontSize: 12,
+              borderRadius: 10,
+            }}
+          >
+            {pet?.age} Yrs
+          </Text>
+          <MarkFav pet={pet} />
+        </View>
       </View>
     </TouchableOpacity>
   );

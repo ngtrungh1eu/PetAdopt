@@ -1,18 +1,17 @@
 import { View, Text, Pressable } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Shared from '@/Shared/Shared';
 import { useUser } from '@clerk/clerk-expo';
 
 export default function MarkFav({ pet }: any) {
-  const user = useUser();
+  const { user } = useUser();
   const [favList, setFavList] = useState([]);
   useEffect(() => {
     user && getFavorite();
   }, [user]);
   const getFavorite = async () => {
     const result = await Shared.GetFavList(user);
-    console.log(result);
     setFavList(result?.favorites ? result?.favorites : []);
   };
   const AddToFav = async () => {
@@ -22,10 +21,18 @@ export default function MarkFav({ pet }: any) {
     getFavorite();
   };
 
+  const RemoveFromFav = async () => {
+    const favResult = favList;
+    const index = favResult.indexOf(pet?.id);
+    favResult.splice(index, 1);
+    await Shared.UpdateFavList(user, favResult);
+    getFavorite();
+  };
+
   return (
     <View>
       {favList.includes(pet?.id) ? (
-        <Pressable>
+        <Pressable onPress={() => RemoveFromFav()}>
           <FontAwesome name="heart" size={24} color="red" />
         </Pressable>
       ) : (
