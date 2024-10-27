@@ -2,6 +2,7 @@ import React from 'react';
 import Colors from '@/constants/Colors';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { View, Text, Image } from 'react-native';
+import MarkFav from '../MarkFav';
 
 export default function PetInfo({ pet }: any) {
   return (
@@ -26,7 +27,7 @@ export default function PetInfo({ pet }: any) {
           </Text>
         </View>
         <View>
-          <FontAwesome5 name="heart" size={24} color="black" />
+          <MarkFav pet={pet} />
         </View>
       </View>
     </View>
