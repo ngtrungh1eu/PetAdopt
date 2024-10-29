@@ -16,14 +16,14 @@ export default function MarkFav({ pet }: any) {
   };
   const AddToFav = async () => {
     const favResult = favList;
-    favResult.push(pet?.id);
+    favResult.push(pet?.id as never);
     await Shared.UpdateFavList(user, favResult);
     getFavorite();
   };
 
   const RemoveFromFav = async () => {
     const favResult = favList;
-    const index = favResult.indexOf(pet?.id);
+    const index = favResult.indexOf(pet?.id as never);
     favResult.splice(index, 1);
     await Shared.UpdateFavList(user, favResult);
     getFavorite();
@@ -31,7 +31,7 @@ export default function MarkFav({ pet }: any) {
 
   return (
     <View>
-      {favList.includes(pet?.id) ? (
+      {favList.includes(pet?.id as never) ? (
         <Pressable onPress={() => RemoveFromFav()}>
           <FontAwesome name="heart" size={24} color="red" />
         </Pressable>
