@@ -3,12 +3,13 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Header from '../../components/Home/header';
 import Slider from '../../components/Home/slider';
 import PetListByCategory from '../../components/Home/petListByCategory';
-import { View, Text, StyleSheet, Touchable, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Touchable, TouchableOpacity, ScrollView } from 'react-native';
 import Colors from '@/constants/Colors';
+import { Link } from 'expo-router';
 
 export default function Home() {
   return (
-    <View style={{ padding: 20, marginTop: 20 }}>
+    <ScrollView style={{ padding: 20, marginTop: 20 }}>
       {/* Header */}
       <Header />
       {/* Slider */}
@@ -16,11 +17,11 @@ export default function Home() {
       {/* ListPet + Category */}
       <PetListByCategory />
       {/* AddNewPetAdopt */}
-      <TouchableOpacity style={styles.addNewPetContainer}>
+      <Link href={'/add-new-pet'} style={styles.addNewPetContainer}>
         <MaterialIcons name="pets" size={24} color="black" />
         <Text style={{ fontFamily: 'outfitMedium', fontSize: 20 }}>Add new pet</Text>
-      </TouchableOpacity>
-    </View>
+      </Link>
+    </ScrollView>
   );
 }
 

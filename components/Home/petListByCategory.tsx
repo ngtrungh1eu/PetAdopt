@@ -27,7 +27,9 @@ export default function PetListByCategory() {
       <Category category={(value: any) => getPetsList(value)} />
       <FlatList
         style={{ marginTop: 15 }}
-        horizontal
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        disableVirtualization
         data={petList}
         refreshing={loader}
         onRefresh={() => getPetsList('Birds')}

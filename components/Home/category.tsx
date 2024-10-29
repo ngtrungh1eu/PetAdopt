@@ -26,6 +26,7 @@ export default function Category({ category }: { category: (value: any) => void 
       <FlatList
         numColumns={4}
         data={categoryList}
+        disableVirtualization
         renderItem={({ item }: any) => (
           <TouchableOpacity
             onPress={() => {
